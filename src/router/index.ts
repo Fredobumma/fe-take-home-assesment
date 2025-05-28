@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Fe Asignment App',
-      component: () => import('../views/Home.vue')
+      component: () => import('@/views/Home.vue')
     }
   ]
 });

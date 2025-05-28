@@ -1,3 +1,36 @@
+# NewGlobe Frontend Assignment
+
+## Initial Error Fixes
+
+### Type Declarations (`src/types/vue.d.ts`)
+- Added TypeScript declaration file for Vue components
+- Resolves TypeScript errors when importing `.vue` files
+- Provides proper type definitions for Vue components
+
+### Incorrect Json format (`data/battery.json`)
+- A json object should be an object with key-value pairs but rather it's an object of objects.
+- Changing from an object "{}" to an array of objects start "[]" resolves the error.
+
+### Load env from vite (`vite.config.ts`)
+- Import the "loadEnv" method from vite to properly load the env.
+- Resolves the process.env.APP_BASE_PATH used in createWebHistory and in env.ts config when validating with zod.
+
+## Setup
+1. Create a `.env` file in the project root with:
+```
+APP_BASE_PATH=/
+```
+
+2. Install dependencies
+```bash
+pnpm install
+```
+
+3. Start development server:
+```bash
+pnpm dev
+```
+
 # Field Support for Batteries
 
 ## Instructions
