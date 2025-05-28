@@ -1,12 +1,11 @@
-import { BatteryRecord, SchoolSummary } from '../types';
-import { processBatteryData } from '../utils/batteryCalculator';
+import type { BatteryRecord, SchoolSummary } from '@/types';
+import { processBatteryData } from '@/utils/batteryCalculator';
 
 class BatteryService {
-  private dataUrl = '/battery-data.json';
+  private dataUrl = 'src/data/battery.json';
   
   /**
-   * Fetch battery data from the JSON file
-   * In a real API, this would include authentication and error handling
+   * Fetch battery data from the JSON file or fake API
    */
   async fetchBatteryData(): Promise<BatteryRecord[]> {
     try {
@@ -14,7 +13,8 @@ class BatteryService {
       if (!response.ok) {
         throw new Error(`Failed to fetch battery data: ${response.statusText}`);
       }
-      return await response.json() as BatteryRecord[];
+      const { data } = await response.json()
+      return data as BatteryRecord[];
     } catch (error) {
       console.error('Error fetching battery data:', error);
       throw error;

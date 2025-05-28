@@ -21,6 +21,7 @@
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "element-plus": "^2.9.2",
     "jsencrypt": "^3.3.2",
     "lucide-vue-next": "^0.428.0",

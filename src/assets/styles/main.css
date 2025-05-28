@@ -4,55 +4,30 @@
 
 @layer base {
   :root {
-    --color-primary: #3b82f6;
-    --color-primary-light-4: #e6f4ff;
-    --color-danger: #f56c6c;
-
-    --text-color: #334155;
-    --background-color: #f1f5f9;
-
-    --menu-active-color: var(--color-primary);
-    --menu-active-background: var(--color-primary-light-4);
-    --menu-hover-color: var(--text-color);
-    --menu-hover-background: var(--background-color);
+    @apply bg-gray-100 text-gray-900;
   }
 
-  :root[class~='dark'] {
-    --color-primary: #3b82f6;
-    --color-primary-light-4: #e6f4ff;
-    --color-danger: #f56c6c;
-
-    --text-color: #334155;
-    --background-color: #f1f5f9;
-
-    --menu-active-color: var(--color-primary);
-    --menu-active-background: var(--color-primary-light-4);
-    --menu-hover-color: var(--text-color);
-    --menu-hover-background: var(--background-color);
+  body {
+    @apply min-h-screen min-w-[320px];
   }
-}
 
-body {
-  min-height: 100dvh;
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  h1 {
+    @apply text-3xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold leading-snug;
+  }
+
+  h3 {
+    @apply text-xl font-semibold leading-snug;
+  }
+
+  button {
+    @apply rounded px-4 py-2 text-sm font-medium bg-blue-600 text-white cursor-pointer transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2;
+  }
+
+  input {
+    @apply px-3 py-2 rounded border border-gray-300 text-sm transition-colors focus:outline-none focus:border-blue-600;
+  }
 }
