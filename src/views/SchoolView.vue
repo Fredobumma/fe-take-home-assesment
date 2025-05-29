@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useBatteryStore } from '@/store/batteryStore';
 import { batteryService } from '@/services/batteryService';
 import DeviceItem from '@/components/DeviceItem.vue';
-// import BatteryChart from '@/components/BatteryChart.vue';
+import BatteryChart from '@/components/BatteryChart.vue';
 import StatusIndicator from '@/components/StatusIndicator.vue';
 import type { BatteryRecord } from '@/types'; // Make sure this import exists and points to the correct type definition
 
@@ -14,6 +14,8 @@ const batteryStore = useBatteryStore();
 const isLoading = ref(true);
 
 const batteryData = ref<BatteryRecord[]>([]);
+const showingChart = ref(false);
+const selectedDevice = ref('');
 const filterStatus = ref('all');
 
 const schoolId = computed(() => {
@@ -47,6 +49,15 @@ onMounted(async () => {
 
 function goBack() {
   router.push({ name: 'dashboard' });
+}
+
+function showDeviceChart(serialNumber: string) {
+  selectedDevice.value = serialNumber;
+  showingChart.value = true;
+}
+
+function closeChart() {
+  showingChart.value = false;
 }
 
 watch(
@@ -147,8 +158,22 @@ watch(
             v-for="device in filteredDevices" 
             :key="device.serialNumber" 
             :device="device"
+            @click="showDeviceChart(device.serialNumber)"
             class="cursor-pointer"
           />
+        </div>
+        
+        <div v-if="showingChart" class="fixed inset-0 bg-black/50 flex items-center justify-center p-6 z-50">
+          <div class="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6">
+            <div class="flex justify-between items-center mb-4 gap-5">
+              <h3 class="text-xl font-semibold">Battery History - {{ selectedDevice }}</h3>
+              <button @click="closeChart" class="text-2xl pt-0.5 pb-1 px-3 rounded-full bg-red-500 hover:bg-red-700">×</button>
+            </div>
+            <BatteryChart 
+              :records="batteryData" 
+              :serialNumber="selectedDevice" 
+            />
+          </div>
         </div>
       </div>
     </main>
