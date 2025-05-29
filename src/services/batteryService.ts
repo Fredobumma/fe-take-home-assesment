@@ -13,9 +13,8 @@ class BatteryService {
       if (!response.ok) {
         throw new Error(`Failed to fetch battery data: ${response.statusText}`);
       }
-      console.log(response);
+      
       const { data } = await response.json();
-      console.log(data);
       return data as BatteryRecord[];
     } catch (error) {
       console.error('Error fetching battery data:', error);

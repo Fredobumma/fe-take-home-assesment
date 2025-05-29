@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const envSchema = z.object({
-  APP_BASE_PATH: z.string(),
+  VITE_APP_BASE_PATH: z?.string().default('/').optional(),
   MOCK_API: z.string().optional()
 });
 

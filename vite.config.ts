@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
     plugins: [vue(), VueDevTools()],
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
-      'process.env.APP_BASE_PATH': JSON.stringify(env.APP_BASE_PATH)
+      'process.env.VITE_APP_BASE_PATH': JSON.stringify(env.VITE_APP_BASE_PATH)
     },
     resolve: {
       alias: {

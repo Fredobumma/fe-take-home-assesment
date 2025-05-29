@@ -9,7 +9,8 @@
 
 ### Load env from vite (`vite.config.ts`)
 - Import the "loadEnv" method from vite to properly load the env.
-- Resolves the process.env.APP_BASE_PATH used in createWebHistory and in env.ts config when validating with zod.
+- Resolves the undefined from process.env.VITE_APP_BASE_PATH used in createWebHistory and in env.ts config when validating with zod.
+- Prefixed APP_BASE_PATH with VITE_, Only variables prefixed with VITE_ are exposed to your Vue application. (This resolves zod error when executing preview command) APP_BASE_PATH -> VITE_APP_BASE_PATH
 
 ### Incorrect Json format (`data/battery.json`)
 - A json object should be an object with key-value pairs but rather it's an object of objects.
@@ -18,7 +19,7 @@
 ## Setup
 1. Create a `.env` file in the project root with:
 ```
-APP_BASE_PATH=/
+VITE_APP_BASE_PATH=/
 ```
 
 2. Install dependencies

@@ -38,9 +38,7 @@ onMounted(async () => {
   try {
     await batteryStore.selectSchool(schoolId.value);
     const data = await batteryService.fetchBatteryData();
-    console.log('hereee');
     batteryData.value = data.filter((record) => record.academyId === schoolId.value);
-    console.log('thereee');
     isLoading.value = false;
   } catch (error) {
     console.error('Error loading school view:', error);
