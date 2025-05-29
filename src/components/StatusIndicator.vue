@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <div class="flex items-center gap-2">
-    <span 
+    <span
       class="inline-block w-3 h-3 rounded-full"
       :class="{
         'bg-emerald-500': status === 'healthy',

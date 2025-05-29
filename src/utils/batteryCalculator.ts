@@ -21,15 +21,15 @@ export function calculateHourlyConsumption(
 
   const startTime = parseISO(start.timestamp);
   const endTime = parseISO(end.timestamp);
-  
+
   // Calculate hours between measurements
   const hoursDiff = differenceInHours(endTime, startTime);
-  
+
   // Avoid division by zero
   if (hoursDiff === 0) {
     return null;
   }
-  
+
   // Calculate hourly consumption rate
   const levelDiff = start.batteryLevel - end.batteryLevel;
   return levelDiff / hoursDiff;
@@ -46,8 +46,8 @@ export function calculateAvgDailyConsumption(records: BatteryRecord[]): number |
   }
 
   // Sort records by timestamp (ascending)
-  const sortedRecords = [...records].sort((a, b) => 
-    parseISO(a.timestamp).getTime() - parseISO(b.timestamp).getTime()
+  const sortedRecords = [...records].sort(
+    (a, b) => parseISO(a.timestamp).getTime() - parseISO(b.timestamp).getTime()
   );
 
   let totalConsumption = 0;
@@ -56,7 +56,7 @@ export function calculateAvgDailyConsumption(records: BatteryRecord[]): number |
   // Calculate consumption for each interval
   for (let i = 0; i < sortedRecords.length - 1; i++) {
     const hourlyRate = calculateHourlyConsumption(sortedRecords[i], sortedRecords[i + 1]);
-    
+
     if (hourlyRate !== null) {
       totalConsumption += hourlyRate;
       validIntervals++;
@@ -81,7 +81,7 @@ export function calculateAvgDailyConsumption(records: BatteryRecord[]): number |
 export function processBatteryData(data: BatteryRecord[]): SchoolSummary[] {
   // Group records by school
   const schoolMap = new Map<number, BatteryRecord[]>();
-  data.forEach(record => {
+  data.forEach((record) => {
     if (!schoolMap.has(record.academyId)) {
       schoolMap.set(record.academyId, []);
     }
@@ -94,7 +94,7 @@ export function processBatteryData(data: BatteryRecord[]): SchoolSummary[] {
   schoolMap.forEach((schoolRecords, academyId) => {
     // Group by device
     const deviceMap = new Map<string, BatteryRecord[]>();
-    schoolRecords.forEach(record => {
+    schoolRecords.forEach((record) => {
       if (!deviceMap.has(record.serialNumber)) {
         deviceMap.set(record.serialNumber, []);
       }
@@ -109,17 +109,17 @@ export function processBatteryData(data: BatteryRecord[]): SchoolSummary[] {
 
     deviceMap.forEach((deviceRecords, serialNumber) => {
       // Sort records by timestamp (ascending)
-      const sortedRecords = [...deviceRecords].sort((a, b) => 
-        parseISO(a.timestamp).getTime() - parseISO(b.timestamp).getTime()
+      const sortedRecords = [...deviceRecords].sort(
+        (a, b) => parseISO(a.timestamp).getTime() - parseISO(b.timestamp).getTime()
       );
 
       const lastRecord = sortedRecords[sortedRecords.length - 1];
       const avgDailyConsumption = calculateAvgDailyConsumption(sortedRecords);
-      
+
       // Determine device health status
       let status: 'healthy' | 'unhealthy' | 'unknown';
       let needsReplacement = false;
-      
+
       if (avgDailyConsumption === null) {
         status = 'unknown';
         unknownCount++;

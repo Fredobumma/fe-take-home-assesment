@@ -9,26 +9,26 @@ export const useBatteryStore = defineStore('battery', {
     loading: false,
     error: null as string | null
   }),
-  
+
   getters: {
     totalUnhealthyDevices: (state) => {
       return state.schools.reduce((total, school) => total + school.unhealthyCount, 0);
     },
-    
+
     schoolsRanked: (state) => {
       return [...state.schools].sort((a, b) => b.unhealthyCount - a.unhealthyCount);
     },
-    
+
     highPrioritySchools: (state) => {
-      return state.schools.filter(school => school.unhealthyCount > 0);
+      return state.schools.filter((school) => school.unhealthyCount > 0);
     }
   },
-  
+
   actions: {
     async fetchSchools() {
       this.loading = true;
       this.error = null;
-      
+
       try {
         this.schools = await batteryService.getSchoolSummaries();
       } catch (err) {
@@ -38,19 +38,19 @@ export const useBatteryStore = defineStore('battery', {
         this.loading = false;
       }
     },
-    
+
     async selectSchool(academyId: number) {
       // First check if we already have this school in our store
-      const existing = this.schools.find(school => school.academyId === academyId);
+      const existing = this.schools.find((school) => school.academyId === academyId);
       if (existing) {
         this.selectedSchool = existing;
         return;
       }
-      
+
       // Otherwise fetch from service
       this.loading = true;
       this.error = null;
-      
+
       try {
         const school = await batteryService.getSchoolDetail(academyId);
         if (school) {
@@ -65,7 +65,7 @@ export const useBatteryStore = defineStore('battery', {
         this.loading = false;
       }
     },
-    
+
     clearSelectedSchool() {
       this.selectedSchool = null;
     }

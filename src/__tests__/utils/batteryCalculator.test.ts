@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { calculateHourlyConsumption, calculateAvgDailyConsumption } from '../../utils/batteryCalculator';
+import {
+  calculateHourlyConsumption,
+  calculateAvgDailyConsumption
+} from '../../utils/batteryCalculator';
 import { BatteryRecord } from '../../types';
 
 describe('batteryCalculator', () => {
@@ -12,7 +15,7 @@ describe('batteryCalculator', () => {
         serialNumber: 'S1',
         timestamp: '2024-02-20T10:00:00Z'
       };
-      
+
       const end: BatteryRecord = {
         academyId: 1,
         batteryLevel: 0.8,
@@ -20,7 +23,7 @@ describe('batteryCalculator', () => {
         serialNumber: 'S1',
         timestamp: '2024-02-20T12:00:00Z'
       };
-      
+
       const result = calculateHourlyConsumption(start, end);
       expect(result).toBeCloseTo(0.1, 5); // Using toBeCloseTo to handle floating-point precision
     });
@@ -33,7 +36,7 @@ describe('batteryCalculator', () => {
         serialNumber: 'S1',
         timestamp: '2024-02-20T10:00:00Z'
       };
-      
+
       const end: BatteryRecord = {
         academyId: 1,
         batteryLevel: 0.8,
@@ -41,7 +44,7 @@ describe('batteryCalculator', () => {
         serialNumber: 'S1',
         timestamp: '2024-02-20T12:00:00Z'
       };
-      
+
       const result = calculateHourlyConsumption(start, end);
       expect(result).toBeNull();
     });
@@ -65,7 +68,7 @@ describe('batteryCalculator', () => {
           timestamp: '2024-02-20T12:00:00Z'
         }
       ];
-      
+
       const result = calculateAvgDailyConsumption(records);
       expect(result).toBe(1); // 50% drop over 12 hours = 100% per day
     });
@@ -80,7 +83,7 @@ describe('batteryCalculator', () => {
           timestamp: '2024-02-20T00:00:00Z'
         }
       ];
-      
+
       const result = calculateAvgDailyConsumption(records);
       expect(result).toBeNull();
     });

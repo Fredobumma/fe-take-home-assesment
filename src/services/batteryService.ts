@@ -3,7 +3,7 @@ import { processBatteryData } from '@/utils/batteryCalculator';
 
 class BatteryService {
   private dataUrl = '/src/data/battery.json';
-  
+
   /**
    * Fetch battery data from the JSON file or fake API
    */
@@ -13,9 +13,9 @@ class BatteryService {
       if (!response.ok) {
         throw new Error(`Failed to fetch battery data: ${response.statusText}`);
       }
-      console.log(response)
-      const { data } = await response.json()
-      console.log(data)
+      console.log(response);
+      const { data } = await response.json();
+      console.log(data);
       return data as BatteryRecord[];
     } catch (error) {
       console.error('Error fetching battery data:', error);
@@ -37,7 +37,7 @@ class BatteryService {
    */
   async getSchoolDetail(academyId: number): Promise<SchoolSummary | undefined> {
     const summaries = await this.getSchoolSummaries();
-    return summaries.find(school => school.academyId === academyId);
+    return summaries.find((school) => school.academyId === academyId);
   }
 }
 
