@@ -18,6 +18,7 @@
 - Tailwind CSS for styling
 - Chart.js and vue-chartjs for battery level visualization
 - Custom components for battery indicators and status displays
+- Full responsiveness across any device/screen size
 
 ### Date Handling
 - date-fns for consistent date formatting and calculations
