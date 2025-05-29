@@ -15,6 +15,11 @@ const router = createRouter({
       name: 'school',
       component: () => import('@/views/SchoolView.vue'),
       props: true
+    },
+    // Redirect any unknown routes to the dashboard
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: { name: 'dashboard' }
     }
   ]
 });
