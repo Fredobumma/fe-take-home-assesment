@@ -1,5 +1,65 @@
 # NewGlobe Frontend Assignment
 
+## Technologies Used
+
+### Frontend Framework
+- Vue.js 3 with Composition API
+- TypeScript for type safety
+
+### State Management
+- Pinia for centralized state management
+- Reactive stores with actions and getters
+
+### Routing
+- Vue Router for navigation
+- Dynamic route parameters for school views
+
+### UI Components
+- Tailwind CSS for styling
+- Chart.js and vue-chartjs for battery level visualization
+- Custom components for battery indicators and status displays
+
+### Date Handling
+- date-fns for consistent date formatting and calculations
+
+### Testing
+- Vitest for unit testing
+- @vue/test-utils for component testing
+- Coverage reporting with @vitest/coverage-v8
+
+
+## Key Features
+
+### Dashboard View
+- School overview with priority indicators
+- Real-time battery health statistics
+- Search functionality for schools
+
+### School Detail View
+- Device-level battery information
+- Historical battery data visualization
+- Status filtering options
+
+### Battery Health Analysis
+- Consumption rate calculation
+- Health status determination
+- Replacement recommendations
+
+
+## Testing Strategy
+
+### Unit Tests
+- Battery calculation utilities
+- Component props and rendering
+- Store actions and getters
+
+### Component Tests
+- Rendering logic
+- User interactions
+- Props validation
+- Event emissions
+
+
 ## Initial Error Fixes
 
 ### Type Declarations (`src/types/vue.d.ts`)
@@ -31,6 +91,19 @@ pnpm install
 ```bash
 pnpm dev
 ```
+
+### NOTE::
+- When running 
+```bash
+pnpm preview
+```
+...preview serves the optimized, minified, and bundled production assets from the dist directory after running a build command
+```bash
+pnpm build
+```
+
+...the request to fetch data from battery.json is implemented using an absolute path ("/src/data/battery.json") and after minification or running a build, the path won't exist as it is minified so a preview won't return data. But it builds successfully "Haha".
+
 
 # Field Support for Batteries
 
