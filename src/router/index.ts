@@ -6,13 +6,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Fe Asignment App Dashboard',
+      name: 'dashboard',
       component: () => import('@/views/Home.vue')
     },
     {
       path: '/school/:id',
       name: 'school',
-      component: () => import('@/views/Home.vue'),
+      component: () => import('@/views/SchoolView.vue'),
       props: true
     },
   ]
